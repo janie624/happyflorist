@@ -1,0 +1,73 @@
+﻿#START:layout
+#START:main
+#START:cart
+#START:currency
+#START:checkout
+#START:flash
+kr:
+
+#END:cart
+#END:checkout
+#END:flash
+#END:main
+#END:layout
+  number:
+    currency:
+      format:
+        unit:      "원"
+        precision: 2
+        separator: "."
+        delimiter: ","
+        format:    "%u%n"
+#END:currency
+
+#START:errors
+  errors:
+    template:
+      body:        "다음 마당에 오유가 있습니다:"
+      header:       
+        one:       "% 오유가 있어서 {model}을 저장할수 없습니다"
+        other:     "%{count}개의 오유가 있어서 %{model}을 저장할수 없습니다"
+#END:errors
+
+#START:layout
+  layouts:
+    application:
+      title:       "나만의 온라인 상점"
+      home:        "홈"
+      questions:   "질문"
+      news:        "뉴스"
+      contact:     "련락처"
+#END:layout
+
+#START:cart
+  carts:
+    cart:
+      title:       "나의 장바구니"
+      empty:       "장바구니 비우기"
+      checkout:    "계산"
+#END:cart
+
+#START:main
+  store:
+    index:
+      title_html:  "카달로그"
+      add_html:    "장바구니에 담기"
+#END:main
+
+#START:checkout
+  orders:
+    new:
+      legend:       "세부사항을 입력하세요"
+    form:
+      name:         "이름"
+      address_html: "주소"
+      email:        "E-mail"
+      pay_type:     "결제방식"
+      pay_prompt_html: "결제방식 선택"
+      submit:       "주문하기"
+#END:checkout
+
+#START:flash
+  thanks:          "주문해주셔서 감사합니다"
+#END:flash

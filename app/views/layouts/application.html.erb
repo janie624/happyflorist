@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Florist Online Store</title>
+<!--<%= stylesheet_link_tag    "application", :media => "all" %>-->
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<!--<body>-->
+<body class='<%=controller.controller_name%>'>
+  <div id="banner">
+    <%= form_tag store_path, class: 'locale' do %>
+      <%= select_tag 'set_locale', 
+        options_for_select(LANGUAGES, I18n.locale.to_s),
+        onchange: 'this.form.submit()' %>
+      <%= submit_tag 'submit' %>
+      <%= javascript_tag "$('.locale input').hide()" %>
+    <% end %>
+    <%= image_tag("coffee_logo.jpg") %>
+    <%= @page_title || t('.title') %>
+  </div>
+  <div id="columns">
+    <div id="side">
+      <ul>
+        <li><%= link_to t('.home'), welcome_home_path %></li>
+        <li><%= link_to t('.product_catalogue'), store_path %></li>
+        <li><%= link_to t('.leave_site'), welcome_thank_you_path %></li>
+        <li><%= link_to t('.register'), welcome_register_path %></li>
+        <li><%= link_to t('.your_cart'), :controller => "carts", :action => "your_cart" %></li>
+        <li><%= link_to t('.create_user'), new_user_path %></li>
+      </ul>
+
+      <% if session[:user_id] %>
+        <% if session[:user_name] == 'admin' %>
+          <ul>
+            <li><%= link_to 'Orders', orders_path %></li>
+            <li><%= link_to 'Products', products_path %></li>
+            <li><%= link_to 'Users', users_path %></li>
+          </ul>
+        <% end %>
+        <a>
+          Logged in as
+          <%= session[:user_name] %>
+        </a>
+        <%= button_to 'Log Out', logout_path, method: :delete %>
+      <% else %>
+        <%= button_to 'Log In', login_path %>
+      <% end %>
+      <br/>
+
+      <% if @cart %>
+        <%= hidden_div_if(@cart.line_items.empty?, id: 'cart') do %>
+          <%= render @cart %>
+        <% end %>
+      <% end %>
+    </div>
+    <div id="main">
+      <%= yield %>
+    </div>
+  </div>
+
+</body>
+</html>
